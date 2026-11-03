@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parking Log BD — পার্কিং লগ</title>
+<meta name="description" content="Free offline parking log for small lots and garages in Bangladesh. Check-ins, exit fees from your own rates, history, JSON export. English / বাংলা.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1 id="app-title">Parking Log BD</h1>
+    <p id="app-subtitle">A simple offline log for small parking lots &amp; garages</p>
+  </div>
+  <button id="lang-toggle" class="btn lang">বাংলা</button>
+</header>
+
+<main class="wrap">
+  <section class="panel">
+    <h2 id="dashboard-h">Today at a glance</h2>
+    <div class="stats">
+      <div class="stat"><span id="label-parked-now" class="stat-label">Parked now</span><strong id="dash-parked">0</strong></div>
+      <div class="stat"><span id="label-exits-today" class="stat-label">Exited today</span><strong id="dash-exits">0</strong></div>
+      <div class="stat"><span id="label-revenue-today" class="stat-label">Collected today</span><strong id="dash-revenue">৳0</strong></div>
+      <div class="stat wide"><span id="label-longest" class="stat-label">Longest parked</span><strong id="dash-longest">—</strong></div>
+    </div>
+    <p id="rates-hint" class="hint">Tip: set your hourly rates in Settings below — fees are calculated from YOUR rates only.</p>
+  </section>
+
+  <section class="panel">
+    <h2 id="checkin-h">Check-in a vehicle</h2>
+    <div class="form-grid">
+      <label id="label-plate" for="in-plate">Number plate *</label>
+      <input id="in-plate" type="text" maxlength="20" autocomplete="off">
+      <label id="label-type" for="in-type">Vehicle type *</label>
+      <select id="in-type"></select>
+      <label id="label-entry" for="in-entry">Entry time *</label>
+      <input id="in-entry" type="datetime-local">
+      <label id="label-phone" for="in-phone">Driver phone (optional)</label>
+      <input id="in-phone" type="tel" inputmode="tel" autocomplete="off">
+      <label id="label-note" for="in-note">Note (optional)</label>
+      <input id="in-note" type="text" maxlength="60" autocomplete="off">
+    </div>
+    <button id="btn-checkin" class="btn primary">Check in</button>
+    <p id="checkin-err" class="form-err" role="alert"></p>
+    <p id="checkin-msg" class="form-ok" role="status"></p>
+  </section>
+
+  <section class="panel">
+    <h2 id="parked-h">Currently parked</h2>
+    <div class="filters">
+      <input id="in-parked-search" type="search" autocomplete="off">
+      <select id="in-parked-type"></select>
+    </div>
+    <p id="parked-empty" class="empty" style="display:none"></p>
+    <div id="parked-list" class="list"></div>
+  </section>
+
+  <section class="panel">
+    <h2 id="history-h">Exit history</h2>
+    <div class="filters">
+      <input id="in-history-search" type="search" autocomplete="off">
+      <label id="label-history-date" for="in-history-date">Filter by exit date</label>
+      <input id="in-history-date" type="date">
+      <button id="btn-clear-date" class="btn">Clear</button>
+    </div>
+    <p id="history-msg" class="form-ok" role="status"></p>
+    <p id="history-empty" class="empty" style="display:none"></p>
+    <div id="history-list" class="list"></div>
+  </section>
+
+  <section class="panel">
+    <h2 id="settings-h">Hourly rates (BDT)</h2>
+    <p id="rates-desc" class="hint"></p>
+    <div class="form-grid">
+      <label id="label-rate-motorcycle" for="in-rate-motorcycle">Motorcycle (/hour)</label>
+      <input id="in-rate-motorcycle" type="number" min="0" step="1" inputmode="numeric">
+      <label id="label-rate-car" for="in-rate-car">Car (/hour)</label>
+      <input id="in-rate-car" type="number" min="0" step="1" inputmode="numeric">
+      <label id="label-rate-cng" for="in-rate-cng">CNG / Auto-rickshaw (/hour)</label>
+      <input id="in-rate-cng" type="number" min="0" step="1" inputmode="numeric">
+      <label id="label-rate-bus" for="in-rate-bus">Bus / Truck (/hour)</label>
+      <input id="in-rate-bus" type="number" min="0" step="1" inputmode="numeric">
+    </div>
+    <button id="btn-save-rates" class="btn primary">Save rates</button>
+    <p id="rates-msg" class="form-ok" role="status"></p>
+  </section>
+
+  <section class="panel">
+    <h2 id="data-h">Your data</h2>
+    <div class="actions">
+      <button id="btn-export" class="btn">Export JSON</button>
+      <button id="btn-import" class="btn">Import JSON</button>
+      <input id="in-import-file" type="file" accept="application/json,.json" hidden>
+    </div>
+    <p id="import-msg" class="form-ok" role="status"></p>
+    <h3 id="erase-h">Erase everything</h3>
+    <p id="erase-hint" class="hint"></p>
+    <div class="actions">
+      <input id="in-erase" type="text" placeholder="DELETE" autocomplete="off">
+      <button id="btn-erase" class="btn danger">Erase</button>
+    </div>
+    <p id="erase-msg" class="form-ok" role="status"></p>
+  </section>
+
+  <p id="disclaimer" class="disclaimer"></p>
+</main>
+
+<script src="js/logic.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
